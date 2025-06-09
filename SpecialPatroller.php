@@ -222,7 +222,7 @@ class SpecialPatroller extends SpecialPage {
 		$uid = $user->getId();
 		extract( $dbr->tableNames( 'recentchanges', 'patrollers', 'page' ) );
 		$res = $dbr->select(
-			[ $page, $recentchanges ],
+			[ $page, $recentchanges, $patrollers ],
 			'*',
 			[
 				'ptr_timestamp IS NULL',
@@ -236,7 +236,7 @@ class SpecialPatroller extends SpecialPage {
 			],
 			__METHOD__,
 			[
-				'LIMIT'	=> '0,1'
+				'LIMIT'	=> 1
 			],
 			[
 				$patrollers => [
